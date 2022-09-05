@@ -11,6 +11,15 @@ body {
     align-items: center;
 }
 
+@media (max-width: 900px) {
+    .rps-buttons {
+        max-width: 300px;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex: 1 1 auto;
+    }
+}
+
 .rps-buttons {
     display: flex;
     gap: 2em;

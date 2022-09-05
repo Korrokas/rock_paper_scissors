@@ -1,7 +1,7 @@
 // defined the variables to grab the button id's and assign value
-const rock = document.querySelector("#rock");
-const paper = document.querySelector("#paper");
-const scissors = document.querySelector("#scissors");
+const rockButton = document.querySelector("#rock");
+const paperButton = document.querySelector("#paper");
+const scissorsButton = document.querySelector("#scissors");
 
 const results = document.querySelector("#results");
 const score = document.querySelector('#score');
@@ -11,9 +11,9 @@ let computerTotal = 0;
 
 // tying to buttons with eventListeners below
 
-rock.addEventListener('click', playRound);
-paper.addEventListener('click', playRound);
-scissors.addEventListener('click', playRound);
+rockButton.addEventListener('click', playRound);
+paperButton.addEventListener('click', playRound);
+scissorsButton.addEventListener('click', playRound);
 
 //computer choice selection
 
@@ -21,6 +21,22 @@ function getComputerChoice() {
     let guess = Math.floor(Math.random() * 3) + 1;
     return guess;
 }
+
+//my updated function to call in playRound
+
+function determineWinner() {
+    if (computerTotal === 5 || playerTotal === 5) {
+        if (computerTotal === 5) {
+            results.textContent = "COMPUTER WINS!";
+        }
+        else {
+            results.textContent = "YOU WIN!";
+        }
+        rockButton.removeEventListener('click', playRound);
+        paperButton.removeEventListener('click', playRound);
+        scissorsButton.removeEventListener('click', playRound);
+    }
+};
 
 //the game logic to determine the winner each round
 
@@ -81,19 +97,5 @@ function playRound() {
         document.querySelector("#computerScore").textContent = `Computer: ${computerTotal}`;
     }
 
-    return roundWinner;
+    determineWinner();
 }
-
-const determineWinner = document.addEventListener('click', e => {
-    if (computerTotal === 5 || playerTotal === 5) {
-        if (computerTotal === 5) {
-            results.textContent = "COMPUTER WINS!";
-        }
-        else {
-            results.textContent = "YOU WIN!";
-        }
-        rock.removeEventListener('click', playRound);
-        paper.removeEventListener('click', playRound);
-        scissors.removeEventListener('click', playRound);
-    }
-});
